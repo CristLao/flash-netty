@@ -28,6 +28,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         loginRequestPacket.setPassword("pwd");
 
         // 编码
+        // 第一个实参 ctx.alloc() 获取的就是与当前连接相关的 ByteBuf 分配器
         ByteBuf buffer = PacketCodeC.INSTANCE.encode(ctx.alloc(), loginRequestPacket);
 
         // 写数据
