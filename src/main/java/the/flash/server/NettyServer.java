@@ -30,6 +30,9 @@ public class NettyServer {
                 .option(ChannelOption.SO_BACKLOG, 1024)
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
                 .childOption(ChannelOption.TCP_NODELAY, true)
+                // 加载顺序是一个双向链表
+                // read  IA -> IB -> IC -> OA -> OB -> OC
+                // write OC -> OB -> OA -> IC -> IB -> IA
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
                         // inBound，处理读数据的逻辑链
